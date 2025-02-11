@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./image/crud.css?=v<?php echo time(); ?>">
+    <link rel="stylesheet" href="./css/crud.css?v=<?php echo time(); ?>">
     <title>Listado de Usuarios</title>
-    <link rel="shortcut icon" href="./image/Person.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./image/person.png" type="image/x-icon">
 </head>
 <body>
     <div class="title">
@@ -20,7 +20,7 @@
                 <label for="id">Código: </label>
                 <input type="number" name="id" id="id" placeholder="Código del producto">
 
-                <label for="name">Nombre: </label>
+                <label for="nombre">Nombre: </label>
                     <input type="text" name="nombre" id="nombre" placeholder="Nombre">
 
                 <button type="submit"><img src="./image/search.png" alt="">Buscar</button>
@@ -39,7 +39,7 @@
                             <th>Cedula</th>
                             <th>Nombre</th>
                             <th>Edad</th>
-                            <th>Ciudad</ht>
+                            <th>Ciudad</th>
                             <th>Estado</th>
                         </tr>
                     </thead>
@@ -74,17 +74,11 @@
                 <br>
 
                 <label for="estado">Estado:</label>
-                
                 <br>
                 <select id="estado" name="estado" >
-                    <option value="Disponible">Disponible</option>
-                    <option value="No Disponible">No Disponible</option>
+                    <option value="Disponible">Avtivo</option>
+                    <option value="No Disponible">No Activo</option>
                 </select>
-
-                <label for="categoria">Categoría:</label>
-                <input type="text" id="categoria" name="categoria" required>
-                <br>
-
 
                 <br>
                 <button type="submit">Crear Usuario</button>
