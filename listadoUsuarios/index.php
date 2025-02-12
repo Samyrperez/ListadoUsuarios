@@ -41,6 +41,7 @@
                             <th>Edad</th>
                             <th>Ciudad</th>
                             <th>Estado</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,7 +59,7 @@
                 <!-- type="hidden"  oculto -->
 
                 <label for="cedula">Cedula</label>
-                <input type="text" id="cedula" name="cedula" required>
+                <input type="number" id="cedula" name="cedula" required>
                 <br>
 
                 <label for="nameUsuario">Nombre del usuario:</label>
@@ -82,10 +83,15 @@
 
                 <br>
                 <button type="submit">Crear Usuario</button>
-                
                 </form>
+
             </div>
 
         </div>
+
+
+
+    <script src="./create.js"></script>
+    <script src="./read.js"></script>
 </body>
 </html>

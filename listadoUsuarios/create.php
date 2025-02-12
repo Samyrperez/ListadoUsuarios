@@ -1,35 +1,34 @@
 <?php
-
-include 'conexion.php';
+include 'db.php';
 
 // 1. Capturar los datos del formulario
-if ($_SERVER['RESQUEST_METHOD'] === 'POST') {
-    $cedula = $_POST['cedula'];
-    $nameUsuario = $_POST['nameUsuario'];
-    $edad = $_POST['edad'];
-    $ciudad = $_POST['ciudad'];
-    $estado = $_POST['estado'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $cedula = trim($_POST['cedula']);
+    $nameUsuario = trim($_POST['nameUsuario']);
+    $edad = intval($_POST['edad']);
+    $ciudad = trim($_POST['ciudad']);
+    $estado = trim($_POST['estado']);
     $fecha = date('Y-m-d H:i:s');
 
-    // 2.Contruir y ejecutar la consulta
-    // 2.1. Validar si los campos estan completos
-    if (!empty($cedula) && 
-    !empty($nameUsuario) &&
-    !empty($edad) &&
-    !empty($ciudad) &&
-    !empty($estado)) {
+    // 2. Validar que los campos no estén vacíos
+    if (!empty($cedula) && !empty($nameUsuario) && !empty($edad) && !empty($ciudad) && !empty($estado)) {
 
-        $sql = "INSERT INTO usuarios (cedula, nameUsuario, edad, ciudad, estado, fecha) VALUES ('$cedula', '$nameUsuario', '$edad', '$ciudad', '$estado', '$fecha')";
+        // 3. Insertar en la base de datos
+        $sql = "INSERT INTO lista_usuarios (cedula, nombre, edad, ciudad, estado, fecha) VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssisss", $cedula, $nameUsuario, $edad, $ciudad, $estado, $fecha);
 
-        if ($conn->query($sql) === TRUE) {
-            echo "Nuevo registro creado";
+        if ($stmt->execute()) {
+            echo json_encode(["status" => "success", "message" => "Usuario creado correctamente."]);
         } else {
-            echo "error " . $sql . "<br>" . $conn->error;
-        } 
+            echo json_encode(["status" => "error", "message" => "Error al guardar el usuario."]);
+        }
+
+        $stmt->close();
+        $conn->close();
     } else {
-        echo "Todos los campos son obligatorios";
+        echo json_encode(["status" => "error", "message" => "Todos los campos son obligatorios."]);
     }
-    
 } else {
-    echo "Error en el metodo de envio";
+    echo json_encode(["status" => "error", "message" => "Método no permitido."]);
 }
